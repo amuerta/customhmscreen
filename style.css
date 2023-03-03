@@ -40,7 +40,7 @@
 }
 
 .search-block {
-	
+	margin-top: 1vh;
 	display: grid;
 	grid-template-columns: 5vh 1fr ;
 	align-items: center;
@@ -52,7 +52,7 @@
 	font-size: 2vh;
 	font-family: 'Quicksand', sans-serif;
 
-	height: 4vh;
+	height: 100%;
 	width: 100%;
 	overflow: hidden;
 	padding: 0.5vh;
@@ -67,7 +67,7 @@
 
 .search-icon {
 	font-size: 3vh;
-	height: 4vh;
+	height: 100%;
 	display: grid;
 	padding-left: 0.5vh;
 	//padding-right: 0.5vh;
