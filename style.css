@@ -287,9 +287,22 @@
 	border-color: var(--altac);
 }
 
+.s /*	Checkbox of smaller size  */ {
+	width: 16px;
+	height: 16px;
+}
+
+.dead {
+	display: none; /* makes element just not be there */
+}
+
 .color-ac {
 	color: var(--ac);
 }
 
+
+.sunbel {
+	margin-top: 1vh;
+}
 
 

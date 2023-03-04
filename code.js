@@ -18,15 +18,19 @@ const quickl = document.getElementById("ql");
 var NEWTAB = false;
 var USEICONS = true;
 var USEPINTEREST = true;
-var USEDISCORD = false;
+var USEDISCORD = true;
 var USEYOUTUBE = true;
 var USEGITHUB = true;
-var USEUNDECL = true;
+var USEUNDECL = false;
 
 // will be overwritten if cached in browser
 
 NEWTAB = localStorage.getItem("newtab");
 USEICONS = localStorage.getItem("linkicon");
+USEDISCORD = localStorage.getItem("useds");
+USEPINTEREST = localStorage.getItem("usepint");
+USEGITHUB = localStorage.getItem("usegit");
+USEYOUTUBE = localStorage.getItem("useyt");
 
 function ret(name, value) { // this is 69iq solution, idc
 	switch (name) { //
@@ -62,7 +66,8 @@ function ret(name, value) { // this is 69iq solution, idc
 			}else {
 			USEDISCORD = false;
 			}
-			console.log("applied : ", NEWTAB );
+			console.log("applied : ", USEDISCORD );
+			cache("useds", USEDISCORD);
 		break;
 
 
@@ -73,7 +78,8 @@ function ret(name, value) { // this is 69iq solution, idc
 			}else {
 			USEPINTEREST = false;
 			}
-			console.log("applied : ", NEWTAB );
+			console.log("applied : ", USEPINTEREST );
+			cache("usepint", USEPINTEREST);
 		break;
 
 
@@ -81,15 +87,25 @@ function ret(name, value) { // this is 69iq solution, idc
 		case "USEGITHUB":
 			//
 			if (value==true) {
-			USEDISCORD = true;
+			USEGITHUB = true;
 			}else {
-			USEDISCORD = false;
+			USEGITHUB = false;
 			}
-			console.log("applied : ", NEWTAB );
+			console.log("applied : ", USEGITHUB );
+			cache("usegit", USEGITHUB);
 		break;
 
+		case "USEYOUTUBE": 
+			if (value==true) {
+			USEYOUTUBE = true;
+			}else {
+			USEYOUTUBE = false;
+			}
+			console.log("applied : ", USEYOUTUBE);
+			cache("useyt" , USEYOUTUBE);
+		break;
 
-		default: console.log("ERR"); break;
+		default: console.log("[ERR] --> {Some bug must happned}"); break;
 	}
 }
 
@@ -169,7 +185,8 @@ let element = document.getElementById(elementID);
 
 
 
-
+//
+// UI stuff
 //
 
 function sync_to_page(bool, elementId) {
@@ -190,7 +207,10 @@ function sync_to_page(bool, elementId) {
 	// TypeScript SHOUD be 99999x times more relaible than ... bool == "true"
 }
 
-
+function enable_icon_checkboxes() {
+	let element = document.getElementById("linkicon");
+	let menu = document.createElement("list");
+}
 
 
 
@@ -222,13 +242,30 @@ function create_icon(link, icon) {
 
 
 function enable_icons() {
-	create_icon(discord, "discord");
-	create_icon(github, "github");
-	create_icon(pinterest, "pinterest");
-	create_icon(yt, "youtube");
-}
+
+
+	let menu = document.getElementById("iconmenu");
+	menu.classList.remove("dead");
+		
+	//enable_icon_checkboxes();
+
+	if (USEDISCORD) {create_icon(discord, "discord");}
+	if (USEGITHUB) {create_icon(github, "github");}
+	if (USEPINTEREST) {create_icon(pinterest, "pinterest");}
+	if (USEYOUTUBE) {create_icon(yt, "youtube");}
+
+	if(USEDISCORD=="false") {remove_icon("discord");}
+	if(USEGITHUB=="false") {remove_icon("github");}
+	if(USEPINTEREST=="false") {remove_icon("pinterest");}
+	if(USEYOUTUBE=="false") {remove_icon("youtube");}
+}	// dont think i stupid or else, i just used to C++ and Rust and this abominmation is just too much for me...
+	// i miss hated by everyone :sparkles <StaTic Typed> langiages :(
 
 function disable_icons() {
+
+	let menu = document.getElementById("iconmenu");
+	menu.classList.add("dead");
+
 	remove_icon("discord");
 	remove_icon("github");
 	remove_icon("pinterest");
@@ -243,9 +280,16 @@ window.onload = function() {
 
 	sync_to_page(NEWTAB, "newtab");
 	sync_to_page(USEICONS, "linkicon");
+
+	sync_to_page(USEDISCORD, "useds");
+	sync_to_page(USEGITHUB, "usegit");
+	sync_to_page(USEYOUTUBE, "useyt");
+	sync_to_page(USEPINTEREST, "usepint");
+
 	console.log("OnLoadFunction: [Loaded]");
 
 	if(USEICONS == "true") {
+		
 		enable_icons();
 	}else{
 		disable_icons();
