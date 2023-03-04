@@ -22,7 +22,9 @@
 				<i class="fa-solid fa-magnifying-glass search-icon"></i>
 				<input type="text" class="search-bar" name="search" onkeypress="lookforenter(event)">
 			</div>
-		
+		<div class="quicklinks" id="ql">
+			
+		</div>
 	</div>
 
 		<div class="actionbar">
@@ -35,10 +37,14 @@
 			<div class="options">
 				
 				<div class="positions">
-					<input class="checkbox" type="checkbox" name="newtab" id="newtab"  onclick="option_newtab();"> <!-- DO NOT USE NAME AS ANCHOR-->
+					<input class="checkbox" type="checkbox" name="newtab" id="newtab"  onclick="option_checkbox('newtab','NEWTAB');"> <!-- DO NOT USE NAME AS ANCHOR-->
 					<p class="color-ac sand">Open new tab on search</p>
 				 </div>
-				<div class="positions"> </div>
+				
+				<div class="positions"> 
+					<input class="checkbox" type="checkbox" name="linkicon" id="linkicon"  onclick="option_checkbox('linkicon','USEICONS');"> <!-- DO NOT USE NAME AS ANCHOR-->
+					<p class="color-ac sand">Enable link icons (Currently not working)</p>
+				</div>
 				<div class="positions"> </div>
 				<div class="positions"> </div>
 

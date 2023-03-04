@@ -1,6 +1,8 @@
 // CONSTANTS OR SETTINGS DECLARATIONS
 
 const google = "http://www.google.com/search?q=";
+const discord = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+const quickl = document.getElementById("ql");
 
 //defaults 
 
@@ -15,8 +17,72 @@ var USEUNDECL = true;
 // will be overwritten if cached in browser
 
 NEWTAB = localStorage.getItem("newtab");
+USEICONS = localStorage.getItem("linkicon");
+
+function ret(name, value) { // this is 69iq solution, idc
+	switch (name) { //
+		case "NEWTAB": 
+			if (value==true) {
+			NEWTAB = true;
+			}else {
+			NEWTAB = false;
+			}
+			console.log("applied : ", NEWTAB );
+			cache("newtab", NEWTAB);
+		break;
+		
 
 
+		case "USEICONS":
+			console.log("[USEICONS]")
+			if (value==true) {
+			USEICONS = true;
+			}else {
+			USEICONS = false;
+			}
+			console.log("applied : ", USEICONS );
+			cache("linkicon", USEICONS);
+		break;
+
+
+
+		case "USEDISCORD":
+			//
+			if (value==true) {
+			USEDISCORD = true;
+			}else {
+			USEDISCORD = false;
+			}
+			console.log("applied : ", NEWTAB );
+		break;
+
+
+		case "USEPINTEREST":
+			//
+			if (value==true) {
+			USEPINTEREST = true;
+			}else {
+			USEPINTEREST = false;
+			}
+			console.log("applied : ", NEWTAB );
+		break;
+
+
+
+		case "USEGITHUB":
+			//
+			if (value==true) {
+			USEDISCORD = true;
+			}else {
+			USEDISCORD = false;
+			}
+			console.log("applied : ", NEWTAB );
+		break;
+
+
+		default: console.log("ERR"); break;
+	}
+}
 
 //
 // FRONTEND JOBS
@@ -74,22 +140,28 @@ function cache(TargetName, TargetValue) {
 
 
 //
+//	Options block
+//
 
-function option_newtab() {
+function option_checkbox(elementID, optname) {
 
-let element = document.getElementById("newtab");
+let element = document.getElementById(elementID);
 
 	if (element.checked) {
-		NEWTAB = true;
+		ret(optname, true); // i automated it bruh
 	}
 	else {
-		NEWTAB = false;
+		ret(optname, false);
 	}
 	let name = element.getAttribute("name"); 
 	console.log("checkbox : ", name ," status is : ", element.checked);
-	cache("newtab", NEWTAB);
+	
 }
 
+
+
+
+//
 
 function sync_to_page(bool, elementId) {
 	let element = document.getElementById(elementId);
@@ -109,6 +181,31 @@ function sync_to_page(bool, elementId) {
 	// TypeScript SHOUD be 99999x times more relaible than ... bool == "true"
 }
 
+
+
+
+
+
+//
+//	Create elements
+//
+function create_icon(link, icon) {
+	
+	let ficon = "fa-"+icon;
+
+	let element = document.createElement("a");
+	element.href = link;
+	//element.height = "4vh";
+	//element.widht = "4vh";  obsolete
+	element.classList.add("default-icon-set");
+	element.classList.add("fa-brands");
+	element.classList.add(ficon);
+	quickl.appendChild(element);
+}
+
+// i got rid of boilerplate Ctrl+C // Ctrl + V code 
+
+
 //
 //	"Main" function
 //
@@ -116,6 +213,7 @@ function sync_to_page(bool, elementId) {
 window.onload = function() {
 
 	sync_to_page(NEWTAB, "newtab");
+	sync_to_page(USEICONS, "linkicon");
 	console.log("OnLoadFunction: [Loaded]");
 
 
