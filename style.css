@@ -172,13 +172,14 @@
 	display: grid;
 	align-items: center;
 	justify-items: center;
-	transition: color;
+	transition: color font-size;
 	transition-duration: 0.4s;
 }
 
 
 .default-icon-set:hover {
 	color: var(--altac);
+	font-size: 4vh;
 }
 
 
