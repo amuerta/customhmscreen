@@ -1,7 +1,16 @@
-// CONSTANTS OR SETTINGS DECLARATIONS
+// ##
+// ##  CONSTANTS OR SETTINGS DECLARATIONS
+// ##
 
+
+// basic url links
 const google = "http://www.google.com/search?q=";
-const discord = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+const discord = "https://discord.com/channels/@me";
+const github = "https://github.com";
+const pinterest = "https://www.pinterest.com";
+const yt = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+
+// constant element Anchors
 const quickl = document.getElementById("ql");
 
 //defaults 
@@ -189,6 +198,11 @@ function sync_to_page(bool, elementId) {
 //
 //	Create elements
 //
+function remove_icon(elementId) { // A.K.A icon name
+	let element = document.getElementById(elementId);
+	element.remove();
+}
+
 function create_icon(link, icon) {
 	
 	let ficon = "fa-"+icon;
@@ -200,11 +214,26 @@ function create_icon(link, icon) {
 	element.classList.add("default-icon-set");
 	element.classList.add("fa-brands");
 	element.classList.add(ficon);
+	element.setAttribute("id", icon);
 	quickl.appendChild(element);
 }
 
 // i got rid of boilerplate Ctrl+C // Ctrl + V code 
 
+
+function enable_icons() {
+	create_icon(discord, "discord");
+	create_icon(github, "github");
+	create_icon(pinterest, "pinterest");
+	create_icon(yt, "youtube");
+}
+
+function disable_icons() {
+	remove_icon("discord");
+	remove_icon("github");
+	remove_icon("pinterest");
+	remove_icon("youtube");
+}
 
 //
 //	"Main" function
@@ -216,5 +245,9 @@ window.onload = function() {
 	sync_to_page(USEICONS, "linkicon");
 	console.log("OnLoadFunction: [Loaded]");
 
-
+	if(USEICONS == "true") {
+		enable_icons();
+	}else{
+		disable_icons();
+	}
 }
