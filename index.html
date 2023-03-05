@@ -17,7 +17,7 @@
 	<body class="main">
 
 	<div class="sbox">
-		<h1 class="title sand" style="font-weight: normal;">Search bar</h1>
+		<h1 class="title sand" id="TITLE" style="font-weight: normal;">Search bar</h1>
 			<div class="search-block">
 				<i class="fa-solid fa-magnifying-glass search-icon"></i>
 				<input type="text" class="search-bar" name="search" onkeypress="lookforenter(event)">
@@ -43,7 +43,7 @@
 				
 				<div class="positions"> 
 					<input class="checkbox" type="checkbox" name="linkicon" id="linkicon"  onclick="option_checkbox('linkicon','USEICONS');"> <!-- DO NOT USE NAME AS ANCHOR-->
-					<p class="color-ac sand">Enable link icons (Requiers page reloading)</p>
+					<p class="color-ac sand">Enable  link icons (Requier page reloading)</p>
 					<div></div> <!--		Space haver :sunglasses	-->
 					<div id="iconmenu" style="grid-template-columns: 1fr; width: 100%;">
 						<div class="positions subel">
@@ -65,13 +65,21 @@
 							<input class="checkbox s" type="checkbox" name="useyt" id="useyt" onclick="option_checkbox('useyt','USEYOUTUBE');">
 							<p class="color-ac sand">Youtube </p>	
 						</div>
-					<d
-					iv>
+					</div>
 				</div>
 
-				<div class="positions"> </div>
+				<div class="positions"> 
+				<input class="checkbox" type="checkbox" name="custtitle" id="custtitle"  onclick="option_checkbox('custtitle','CUSTOMETITILE');"> <!-- DO NOT USE NAME AS ANCHOR-->
+					<p class="color-ac sand">Use custom bar title</p>
+					<div></div>
+
+					<input class="usernamefield" type="text" name="username" id="username" onkeypress="submit_title(event)">
+
+				</div>
 				
-				<div class="positions"> </div>
+				<div class="positions">
+					<p class="color-ac sand">Under development</p>
+				</div>
 
 			</div>
 

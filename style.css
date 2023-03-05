@@ -254,7 +254,7 @@
 .options {
 	position: relative;
 	display: grid;
-	grid-template-rows: 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr 2fr 1fr 1fr;
 	
 	padding: 0.5vw;
 	padding-left: 2vw;
@@ -292,12 +292,31 @@
 	height: 16px;
 }
 
+.usernamefield {
+	color: var(--ac);
+	width: 80%;
+	outline: none;
+	background: var(--acfg);
+	border: none;
+	transition: box-shadow;
+	transition-duration: 0.5s;
+}
+.usernamefield:hover {
+	box-shadow: 0px 1px 0px var(--ac);
+}
+.usernamefield:focus {
+	box-shadow: 0px 3px 0px var(--altac);
+}
+
 .dead {
 	display: none; /* makes element just not be there */
 }
 
 .color-ac {
 	color: var(--ac);
+}
+.color-fg {
+	color: var(--fg);
 }
 
 

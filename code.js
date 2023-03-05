@@ -15,6 +15,7 @@ const quickl = document.getElementById("ql");
 
 //defaults 
 
+var CUSTOMETITILE = false;
 var NEWTAB = false;
 var USEICONS = true;
 var USEPINTEREST = true;
@@ -22,6 +23,10 @@ var USEDISCORD = true;
 var USEYOUTUBE = true;
 var USEGITHUB = true;
 var USEUNDECL = false;
+var INUSE = false;
+
+var defaulttext = document.createTextNode("Search bar");
+var usertext = "Search bar";
 
 // will be overwritten if cached in browser
 
@@ -31,6 +36,24 @@ USEDISCORD = localStorage.getItem("useds");
 USEPINTEREST = localStorage.getItem("usepint");
 USEGITHUB = localStorage.getItem("usegit");
 USEYOUTUBE = localStorage.getItem("useyt");
+CUSTOMETITILE = localStorage.getItem("custtitle");
+
+usertext = localStorage.getItem("customtext");
+
+
+
+if(usertext==null) {
+usertext="Search bar";
+console.log("YO BAD");
+} else /* dont wanna "null" as name bruh*/ {
+INUSE = true;
+}
+
+
+
+
+
+// dont ask about that please
 
 function ret(name, value) { // this is 69iq solution, idc
 	switch (name) { //
@@ -105,6 +128,16 @@ function ret(name, value) { // this is 69iq solution, idc
 			cache("useyt" , USEYOUTUBE);
 		break;
 
+		case "CUSTOMETITILE": 
+			if (value==true) {
+				CUSTOMETITILE = true;
+			} else {
+				CUSTOMETITILE = false
+			}
+			console.log("applied : ", CUSTOMETITILE );
+			cache("custtitle", CUSTOMETITILE);
+		break;
+
 		default: console.log("[ERR] --> {Some bug must happned}"); break;
 	}
 }
@@ -139,6 +172,18 @@ function lookforenter(e) {
 	}
 }
 
+///
+function submit_title(t) {
+	let key = t.keyCode || t.which;
+
+	if (key == 13) {
+		let titlename = document.getElementsByName('username')[0].value;
+		toggle_custtitle(CUSTOMETITILE,titlename);	
+		console.log(titlename);
+	}
+
+	
+}
 ///
 
 function opensettings() {
@@ -207,12 +252,29 @@ function sync_to_page(bool, elementId) {
 	// TypeScript SHOUD be 99999x times more relaible than ... bool == "true"
 }
 
-function enable_icon_checkboxes() {
-	let element = document.getElementById("linkicon");
-	let menu = document.createElement("list");
+function toggle_custtitle(state, usertext) {
+
+	console.log("toggle func datatype: ", typeof state);
+	let element = document.getElementById("TITLE");
+	let text = document.createTextNode(usertext);
+	let tohide = document.getElementById("username");
+	console.log("typeof state: ", typeof state)
+	if (state == "true") {
+		element.innerHTML="";
+		element.appendChild(text);
+		tohide.classList.remove("dead");
+
+	} else {
+		element.innerHTML="";
+		element.appendChild(defaulttext);
+		tohide.classList.add("dead");
+	}
+	cache("customtext", usertext);
 }
 
 
+
+//
 
 
 //
@@ -285,6 +347,7 @@ window.onload = function() {
 	sync_to_page(USEGITHUB, "usegit");
 	sync_to_page(USEYOUTUBE, "useyt");
 	sync_to_page(USEPINTEREST, "usepint");
+	sync_to_page(CUSTOMETITILE, "custtitle");
 
 	console.log("OnLoadFunction: [Loaded]");
 
@@ -293,5 +356,21 @@ window.onload = function() {
 		enable_icons();
 	}else{
 		disable_icons();
+	}
+
+
+	{
+		let tohide = document.getElementById("username");
+		if(CUSTOMETITILE == "true") {
+			if(INUSE) {
+				tohide.setAttribute("placeholder","Already exist");
+			}
+		toggle_custtitle("true", usertext);
+		tohide.classList.remove("dead");
+		}else {
+		//console.log("its false")
+		tohide.classList.add("dead");
+		tohide.removeAttribute("placeholder");
+		}
 	}
 }
