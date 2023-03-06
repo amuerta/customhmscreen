@@ -14,7 +14,7 @@ const yt = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
 const quickl = document.getElementById("ql");
 
 //defaults 
-
+// defaults
 var CUSTOMETITILE = false;
 var NEWTAB = false;
 var USEICONS = true;
@@ -24,6 +24,8 @@ var USEYOUTUBE = true;
 var USEGITHUB = true;
 var USEUNDECL = false;
 var INUSE = false;
+var USESHADOW = false;
+var USEOUTLINE = false;
 
 var defaulttext = document.createTextNode("Search bar");
 var usertext = "Search bar";
@@ -36,7 +38,9 @@ USEDISCORD = localStorage.getItem("useds");
 USEPINTEREST = localStorage.getItem("usepint");
 USEGITHUB = localStorage.getItem("usegit");
 USEYOUTUBE = localStorage.getItem("useyt");
+USESHADOW = localStorage.getItem("useshadow");
 CUSTOMETITILE = localStorage.getItem("custtitle");
+USEOUTLINE = localStorage.getItem("useoutline");
 
 usertext = localStorage.getItem("customtext");
 
@@ -67,7 +71,16 @@ function ret(name, value) { // this is 69iq solution, idc
 			cache("newtab", NEWTAB);
 		break;
 		
-
+		case "USEOUTLINE": 
+			console.log("[USEOUTLINE]");
+			if(value == true) {
+				USEOUTLINE = true;
+			} else {
+				USEOUTLINE = false;
+			}
+			console.log("applied outline : ", USEOUTLINE );
+			cache("useoutline", USEOUTLINE);
+		break;
 
 		case "USEICONS":
 			console.log("[USEICONS]")
@@ -80,7 +93,15 @@ function ret(name, value) { // this is 69iq solution, idc
 			cache("linkicon", USEICONS);
 		break;
 
-
+		case "USESHADOW": 
+			if(value == true) {
+				USESHADOW = true;
+			} else {
+				USESHADOW = false;
+			}
+			console.log("applied for shadow : ", USESHADOW);
+			cache("useshadow", USESHADOW);
+		break;
 
 		case "USEDISCORD":
 			//
@@ -272,14 +293,37 @@ function toggle_custtitle(state, usertext) {
 	cache("customtext", usertext);
 }
 
+function toggle_shadow(arg) {
+	let element = document.getElementById("sbox");
+	if(arg == "true") {
+		console.log("toggle shadow");
+		element.classList.add("boxshadow");
+	} else {
+		console.log("untoggle shadow");
+		element.classList.remove("boxshadow");
+	}
+}
 
+function toggle_outline(arg) {
+	let element = document.getElementById("sbox");
+	if (arg == "true") {
+		console.log("outline [+]");
+		element.classList.add("boxoutline");
+	} else {
+		console.log("outline [-]");
+		element.classList.remove("boxoutline");
+	}
+}
 
 //
 
 
 //
-//	Create elements
+//	Create or manipulate elements
 //
+
+
+
 function remove_icon(elementId) { // A.K.A icon name
 	let element = document.getElementById(elementId);
 	element.remove();
@@ -348,6 +392,8 @@ window.onload = function() {
 	sync_to_page(USEYOUTUBE, "useyt");
 	sync_to_page(USEPINTEREST, "usepint");
 	sync_to_page(CUSTOMETITILE, "custtitle");
+	sync_to_page(USESHADOW, "useshadow");
+	sync_to_page(USEOUTLINE, "useoutline");
 
 	console.log("OnLoadFunction: [Loaded]");
 
@@ -358,6 +404,16 @@ window.onload = function() {
 		disable_icons();
 	}
 
+	toggle_shadow(USESHADOW);
+	toggle_outline(USEOUTLINE);
+
+	if(USESHADOW == "true" && USEOUTLINE =="true") {
+		let element = document.getElementById("sbox");
+		element.classList.remove("boxshadow");
+		element.classList.remove("boxoutline")
+		element.classList.add("boxshadow_outline");
+		element.classList.add("boxborder");
+	}
 
 	{
 		let tohide = document.getElementById("username");

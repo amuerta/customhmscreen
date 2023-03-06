@@ -16,7 +16,7 @@
 	
 	<body class="main">
 
-	<div class="sbox">
+	<div class="sbox" id="sbox">
 		<h1 class="title sand" id="TITLE" style="font-weight: normal;">Search bar</h1>
 			<div class="search-block">
 				<i class="fa-solid fa-magnifying-glass search-icon"></i>
@@ -78,7 +78,10 @@
 				</div>
 				
 				<div class="positions">
-					<p class="color-ac sand">Under development</p>
+					<input class="checkbox" type="checkbox" name="useshadow" id="useshadow"  onclick="option_checkbox('useshadow','USESHADOW');">
+					<p class="color-ac sand">Use shadow [On Page refresh]</p>
+					<input class="checkbox" type="checkbox" name="useoutline" id="useoutline"  onclick="option_checkbox('useoutline','USEOUTLINE');">
+					<p class="color-ac sand">Use outline [On Page refresh]</p>
 				</div>
 
 			</div>
