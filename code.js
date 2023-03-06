@@ -326,7 +326,9 @@ function toggle_outline(arg) {
 
 function remove_icon(elementId) { // A.K.A icon name
 	let element = document.getElementById(elementId);
-	element.remove();
+	if(element!=null) {
+		element.remove();
+	}
 }
 
 function create_icon(link, icon) {
